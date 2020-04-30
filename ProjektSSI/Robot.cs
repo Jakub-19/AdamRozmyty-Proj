@@ -14,6 +14,25 @@ namespace ProjektSSI
         private Brick _brick;
         public bool Connected { get; private set; }
         public event Action ConnectionSuccess;
+        private bool isDriving;
+        private uint leftSensor;
+        private uint rightSensor;
+        private int _leftMotor = 40;
+        private int _rightMotor = 40;
+        private int LeftMotor {
+            get => -_leftMotor;
+            set
+            {
+                _rightMotor = value;
+            }
+        }
+        private int RightMotor {
+            get => -_rightMotor;
+            set
+            {
+                _rightMotor = value;
+            }
+        }
 
         public Robot(string com)
         {
@@ -21,18 +40,29 @@ namespace ProjektSSI
             _brick.BrickChanged += ConnectionChanged;
         }
 
-        public void Go()//Funkcja utrzymująca robota w ruchu
+        public async void Go()//Funkcja utrzymująca robota w ruchu
         {
-            _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, 40);
-            _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, 40);
+            isDriving = true;
 
+            while(isDriving)
+            {
+                Debug.WriteLine("Right motor speed: " + RightMotor);
+                Debug.WriteLine("Left motor speed: " + LeftMotor);
+                await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, RightMotor);
+                await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, LeftMotor);
+                double robotSpeed = Speed.GetResultantSpeed(LeftMotor, RightMotor);
+                double reading = ElementaryFunctions.Reading((int)leftSensor, (int)rightSensor);
+                double inclination = Core.HowTheRouteRuns(robotSpeed, reading);
+                ChooseTurn(inclination);
+            }
 
 
         }
-        public void Stop()//Funkcja zatrzymująca robota
+        public async void Stop()//Funkcja zatrzymująca robota
         {
-            _brick.DirectCommand.StopMotorAsync(OutputPort.A, false);
-            _brick.DirectCommand.StopMotorAsync(OutputPort.D, false);
+            isDriving = false;
+            await _brick.DirectCommand.StopMotorAsync(OutputPort.A, false);
+            await _brick.DirectCommand.StopMotorAsync(OutputPort.D, false);
         }
 
         private void ChooseTurn(double inclination)
@@ -60,13 +90,13 @@ namespace ProjektSSI
             if(inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, -(int)inclination);
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, -(int)inclination/2);
+                LeftMotor = (int)inclination / 2;
+                RightMotor = (int)inclination;
             }
             else//W prawo
             {
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, -(int)inclination / 2);
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, -(int)inclination);
+                RightMotor = (int)inclination / 2;
+                LeftMotor = (int)inclination;
             }
         }
         private void TurnEasy(double inclination)
@@ -74,19 +104,19 @@ namespace ProjektSSI
             if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, -(int)inclination * 2);
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, -(int)inclination);
+                RightMotor = (int)inclination * 2;
+                LeftMotor = (int)inclination;
             }
             else//W prawo
             {
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, -(int)inclination);
-                _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, -(int)inclination * 2);
+                LeftMotor = (int)inclination * 2;
+                RightMotor = (int)inclination;
             }
         }
         private void GoStraight(double inclination)
         {
-            _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, -90);
-            _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, -90);
+            LeftMotor = 90;
+            RightMotor = 90;
         }
 
         public void Connect()
@@ -100,8 +130,11 @@ namespace ProjektSSI
             {
                 ConnectionSuccess();
             }
-            Debug.WriteLine("Brick Changed!");
             Connected = true;
+            leftSensor = (uint)e.Ports[InputPort.Four].RawValue;
+            rightSensor = (uint)e.Ports[InputPort.One].RawValue;
+            Debug.WriteLine("Left sensor value: " + leftSensor);
+            Debug.WriteLine("Right sensor value: " + rightSensor);
             //_brick.DirectCommand.PlayToneAsync(100, 1000, 300);
         }
     }
