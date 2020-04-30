@@ -35,9 +35,9 @@ namespace ProjektSSI
             #endregion
 
             //deklaracja stałych 
-            int slowParameter = 10;
-            int mediumParameter = 50;
-            int fastParameter = 90;
+            const int slowParameter = 10;
+            const int mediumParameter = 50;
+            const int fastParameter = 90;
 
             //obliczenie wszystkich wartosci dla predkosci wypadkowej wolno
             tabSlow[0] = leftMotorSpeedRear * rightMotorSpeedSlow;
