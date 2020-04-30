@@ -12,8 +12,6 @@ namespace ProjektSSI
     public class Robot
     {
         private Brick _brick;
-        public uint BlackColor { get; set; }
-        public uint WhiteColor { get; set; }
         public bool Connected { get; private set; }
         public event Action ConnectionSuccess;
 

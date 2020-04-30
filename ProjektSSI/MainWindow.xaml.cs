@@ -55,9 +55,8 @@ namespace ProjektSSI
 
         private void buttonCalibrate_Click(object sender, RoutedEventArgs e)
         {
-            robot.BlackColor = (uint)sliderBlackNumber.Value;
-            robot.WhiteColor = (uint)sliderWhiteNumber.Value;
-            ElementaryFunctions.P = robot.WhiteColor - robot.BlackColor;
+            ElementaryFunctions.BlackColor = (uint)sliderBlackNumber.Value;
+            ElementaryFunctions.WhiteColor = (uint)sliderWhiteNumber.Value;
             buttonStart.IsEnabled = true;
             textBlockCalibrationStatus.Text = "Skalibrowano.";
             textBlockCalibrationStatus.Foreground = Brushes.Green;
