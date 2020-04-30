@@ -42,6 +42,13 @@ namespace ProjektSSI
         {
             return Bell(x, 10, 5, 15, false);
         }
+        static public double SpeedRear(double x)
+        {
+            if (x >= 0)
+                return 0;
+            else
+                return -1;
+        }
         #endregion
         #region funkcje przynależności odczytu
         static public double ReadingEasyRight(double x)
