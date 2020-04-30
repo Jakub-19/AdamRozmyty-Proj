@@ -11,10 +11,11 @@ namespace ProjektSSI
 
         public static uint BlackColor { get; set; }
         public static uint WhiteColor { get; set; }
-        private static double p = 100 / (WhiteColor - BlackColor);
+        public static double P { get; set; }
         //Odczyt()
         static public double Reading(int readingLeft, int readingRight) //funkcja zwracająca obliczoną wartość odczytu
-        { 
+        {
+            return 0;
         }
         static public double Bell(double x, double c, double x1, double x2, bool straight) //funkcja zwracająca obliczoną wartość funkcji przynależności (wartości w zakresie <0, 1>)
         {

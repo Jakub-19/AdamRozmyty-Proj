@@ -57,6 +57,7 @@ namespace ProjektSSI
         {
             ElementaryFunctions.BlackColor = (uint)sliderBlackNumber.Value;
             ElementaryFunctions.WhiteColor = (uint)sliderWhiteNumber.Value;
+            ElementaryFunctions.P = 100 / ElementaryFunctions.WhiteColor - ElementaryFunctions.BlackColor;
             buttonStart.IsEnabled = true;
             textBlockCalibrationStatus.Text = "Skalibrowano.";
             textBlockCalibrationStatus.Foreground = Brushes.Green;
