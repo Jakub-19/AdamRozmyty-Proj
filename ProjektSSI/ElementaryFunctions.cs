@@ -8,14 +8,14 @@ namespace ProjektSSI
 {
     public static class ElementaryFunctions
     {
-
         public static uint BlackColor { get; set; }
         public static uint WhiteColor { get; set; }
         public static double P { get; set; }
-        //Odczyt()
-        static public double Reading(int readingLeft, int readingRight) //funkcja zwracająca obliczoną wartość odczytu
+        static public double Reading(int readingLeft, int readingRight) //funkcja zwracająca obliczoną wartość odczytu, gdzie 100-maksymalnie czarny, 0-maksymalnie biały
         {
-            return 0;
+            double readL = Math.Abs(((readingLeft - BlackColor) * P) - 100);
+            double readR = Math.Abs(((readingRight - BlackColor) * P) - 100);
+            return (readR - readL) / 10;
         }
         static public double Bell(double x, double c, double x1, double x2, bool straight) //funkcja zwracająca obliczoną wartość funkcji przynależności (wartości w zakresie <0, 1>)
         {
