@@ -8,11 +8,14 @@ namespace ProjektSSI
 {
     public static class ElementaryFunctions
     {
-        public static uint P {get;set;}
-        //Proporcja()
-        static public double Proportion(uint blackValue, uint whiteValue) //funkcja zwracająca obliczoną wartość odczytu
+        private static double _p;
+        public static double P 
         {
-            return 100 / (whiteValue - blackValue);
+            get => _p;
+            set 
+            {
+                _p = 100 / value;
+            } 
         }
         //Odczyt()
         static public double Reading(int readingLeft, int readingRight) //funkcja zwracająca obliczoną wartość odczytu

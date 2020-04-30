@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektSSI"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Adam Rozmyty" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
@@ -35,10 +35,10 @@
             >
                 <ComboBoxItem>1</ComboBoxItem>
                 <ComboBoxItem>2</ComboBoxItem>
-                <ComboBoxItem IsSelected="True">3</ComboBoxItem>
-                <ComboBoxItem>4</ComboBoxItem>
+                <ComboBoxItem>3</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">4</ComboBoxItem>
             </ComboBox>
-            <Button x:Name="buttonConnect" Grid.Column="2" Content="Połącz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="buttonConnect" Grid.Column="2" Content="Połącz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonConnect_Click"/>
             <TextBlock x:Name="textBlockConnectionStatus" Grid.Column="3" Text="Nie połączono!" FontSize="30" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red"/>
         </Grid>
         <Grid Grid.Row="1" Background="LightSalmon">
@@ -68,7 +68,7 @@
                 <TextBox x:Name="textBoxWhiteNumber"  Grid.Row="1" Text="{Binding Path=Value,ElementName=sliderWhiteNumber}"  FontSize="30" VerticalAlignment="Center" TextAlignment="Center" Width="70"/>
                 <Slider x:Name="sliderWhiteNumber" Grid.Row="2" Minimum="0" Maximum="100" Value="50" VerticalAlignment="Center" Margin="10,10,10,10" TickFrequency="1" IsSnapToTickEnabled="True"/>
             </Grid>
-            <Button x:Name="buttonCalibrate" Grid.Column="2" Content="Zapisz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Button x:Name="buttonCalibrate" Grid.Column="2" Content="Zapisz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonCalibrate_Click"/>
             <TextBlock x:Name="textBlockCalibrationStatus" Grid.Column="3" Text="Nie skalibrowano!" FontSize="30" Margin="40" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red"/>
         </Grid>
         <Grid Grid.Row="2" Background="Bisque">
@@ -77,9 +77,9 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonStart" Grid.Column="0" Content="Start" Width="150" Height="70" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <Button x:Name="buttonStop" Grid.Column="1" Content="Stop" Width="150" Height="70" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-            <TextBlock x:Name="textBlockProgramStatus" Grid.Column="2" Text="Program działa..." VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+            <Button x:Name="buttonStart" Grid.Column="0" Content="Start" Width="150" Height="70" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonStart_Click"/>
+            <Button x:Name="buttonStop" Grid.Column="1" Content="Stop" Width="150" Height="70" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonStop_Click"/>
+            <TextBlock x:Name="textBlockProgramStatus" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
         </Grid>
     </Grid>
 </Window>
