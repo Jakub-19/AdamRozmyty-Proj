@@ -21,12 +21,12 @@ namespace ProjektSSI
             _brick.BrickChanged += ConnectionChanged;
         }
 
-        public void Go()
+        public void Go()//Funkcja utrzymująca robota w ruchu
         {
             _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, 10);
             _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, 10);
         }
-        public void Stop()
+        public void Stop()//Funkcja zatrzymująca robota
         {
             _brick.DirectCommand.StopMotorAsync(OutputPort.A, false);
             _brick.DirectCommand.StopMotorAsync(OutputPort.D, false);
