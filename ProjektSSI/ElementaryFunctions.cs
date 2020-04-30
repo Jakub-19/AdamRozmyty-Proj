@@ -19,6 +19,7 @@ namespace ProjektSSI
         }
         static public double Bell(double x, double c, double x1, double x2, bool straight) //funkcja zwracająca obliczoną wartość funkcji przynależności (wartości w zakresie <0, 1>)
         {
+            x = x / 10;
             if (x < x1 || x > x2)
                 return 0;
             double a = 2.5, b = 2.5;

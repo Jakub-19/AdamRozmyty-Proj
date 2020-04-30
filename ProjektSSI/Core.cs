@@ -77,7 +77,8 @@ namespace ProjektSSI
                 easyRightMembership = temp;
             #endregion
 
-            return (easyLeftMembership * easyLeft + easyRightMembership * easyRight + hardRightMembership * hardRight + hardLeftMembership * hardLeft + straightMembership * straight)/(easyLeftMembership + easyRightMembership + hardRightMembership + hardLeftMembership + straightMembership);
+            double value = (easyLeftMembership * easyLeft + easyRightMembership * easyRight + hardRightMembership * hardRight + hardLeftMembership * hardLeft + straightMembership * straight) / (easyLeftMembership + easyRightMembership + hardRightMembership + hardLeftMembership + straightMembership);
+            return value;
         }
     }
 }
