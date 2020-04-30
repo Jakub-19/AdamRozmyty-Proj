@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
+
+        <Button x:Name="Button" FontSize="100" Content="SIEMA"></Button>
         
     </Grid>
 </Window>
