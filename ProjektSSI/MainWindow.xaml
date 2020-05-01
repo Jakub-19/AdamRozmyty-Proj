@@ -7,18 +7,33 @@
         mc:Ignorable="d"
         Title="Adam Rozmyty" Height="450" Width="800">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush  StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#F9F871" Offset="1"/>
+                <GradientStop Color="#FFC75F" Offset="0.8"/>
+                <GradientStop Color="#FF9671" Offset="0.6"/>
+                <GradientStop Color="#FF6F91" Offset="0.4"/>
+                <GradientStop Color="#D65DB1" Offset="0.2"/>
+                <GradientStop Color="#845EC2" Offset="0"/>
+            </LinearGradientBrush>
+            <!--
+            <GradientStop Color="#9cdbc5" Offset="1.2"/>
+                <GradientStop Color="#43b08b" Offset="0.5"/>
+                <GradientStop Color="#167a58" Offset="0"/>
+            -->
+            <!--
+            <GradientStop Color="#79a6ad" Offset="0"/>
+                <GradientStop Color="#5a8a96" Offset="0.5"/>
+                <GradientStop Color="#b8cdd4" Offset="1.2"/>
+            -->
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="2*"/>
         </Grid.RowDefinitions>
+        <Border BorderThickness="4" BorderBrush="Black">
         <Grid Grid.Row="0">
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                    <GradientStop Color="#7bc1c9" Offset="0"/>
-                    <GradientStop Color="#d68196" Offset="0.567"/>
-                </LinearGradientBrush>
-            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="2*"/>
@@ -45,16 +60,11 @@
                 <ComboBoxItem IsSelected="True">4</ComboBoxItem>
             </ComboBox>
             <Button x:Name="buttonConnect" Grid.Column="2" Content="Połącz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonConnect_Click"/>
-            <TextBlock x:Name="textBlockConnectionStatus" Grid.Column="3" Text="Nie połączono!" FontSize="30" Margin="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red"/>
+                <TextBlock x:Name="textBlockConnectionStatus" Grid.Column="3" Text="Nie połączono!" FontSize="30" Margin="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#b50900"/>
         </Grid>
-
+        </Border>
+        <Border Grid.Row="1" BorderThickness="4 0 4 4" BorderBrush="Black">
         <Grid Grid.Row="1">
-            <Grid.Background>
-                <LinearGradientBrush EndPoint="0.1,1" StartPoint="0.6,0.1">
-                    <GradientStop Color="#005580" Offset="0.1"/>
-                    <GradientStop Color="#008078" Offset="0.6"/>
-                </LinearGradientBrush>
-            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="3*"/>
@@ -82,18 +92,11 @@
                 <Slider x:Name="sliderWhiteNumber" Grid.Row="2" Minimum="0" Maximum="100" Value="50" VerticalAlignment="Center" Margin="10,10,10,10" TickFrequency="1" IsSnapToTickEnabled="True"/>
             </Grid>
             <Button x:Name="buttonCalibrate" Grid.Column="2" Content="Zapisz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonCalibrate_Click"/>
-            <TextBlock x:Name="textBlockCalibrationStatus" Grid.Column="3" Text="Nie skalibrowano!" FontWeight="Bold" FontSize="30" Margin="40" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="Red"/>
+            <TextBlock x:Name="textBlockCalibrationStatus" Grid.Column="3" Text="Nie skalibrowano!" FontWeight="Bold" FontSize="30" Margin="40" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#b50900"/>
         </Grid>
+        </Border>
+        <Border Grid.Row="2" BorderThickness="4 0 4 4" BorderBrush="Black">
         <Grid Grid.Row="2">
-            <Grid.Background>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-                    <GradientStop Color="Yellow" Offset="0.0" />
-                    <GradientStop Color="HotPink" Offset="0.25" />
-                    <GradientStop Color="Red" Offset="0.5" />
-                    <GradientStop Color="Blue" Offset="0.75" />
-                    <GradientStop Color="LimeGreen" Offset="1" />
-                </LinearGradientBrush>
-            </Grid.Background>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="1*"/>
@@ -103,5 +106,6 @@
             <Button x:Name="buttonStop" Grid.Column="1" Content="Stop" Width="150" Height="70" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonStop_Click"/>
             <TextBlock x:Name="textBlockProgramStatus" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
         </Grid>
+        </Border>
     </Grid>
 </Window>
