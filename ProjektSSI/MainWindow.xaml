@@ -44,10 +44,12 @@
                        Grid.Column="0" 
                        Text="COM" 
                        FontSize="30" 
-                       HorizontalAlignment="Center" 
+                       HorizontalAlignment="Center"
                        VerticalAlignment="Center" 
+                       FontFamily="Tahoma"
             />
             <ComboBox x:Name="comboBoxNumerCOM"
+                      FontFamily="Tahoma"
                       Margin="10,10,10,10"  
                       Grid.Column="1" 
                       FontSize="25" 
@@ -59,8 +61,20 @@
                 <ComboBoxItem>3</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">4</ComboBoxItem>
             </ComboBox>
-            <Button x:Name="buttonConnect" Grid.Column="2" Content="Połącz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonConnect_Click"/>
-                <TextBlock x:Name="textBlockConnectionStatus" Grid.Column="3" Text="Nie połączono!" FontSize="30" Margin="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#b50900"/>
+                <Button x:Name="buttonConnect" Grid.Column="2" Content="Połącz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" FontFamily="Tahoma" VerticalAlignment="Center" Click="buttonConnect_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="14"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush  StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#bdc3c7" Offset="1"/>
+                            <GradientStop Color="#2c3e50" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="textBlockConnectionStatus" Grid.Column="3" Text="Nie połączono!" FontSize="30" FontFamily="Tahoma" Margin="20" FontWeight="Bold" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#b50900"/>
         </Grid>
         </Border>
         <Border Grid.Row="1" BorderThickness="4 0 4 4" BorderBrush="Black">
@@ -77,8 +91,8 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="textBlockBlackColor"  Grid.Row="0" Text="Czarny"  FontSize="30" Margin="10" HorizontalAlignment="Center"  VerticalAlignment="Center" />
-                <TextBox x:Name="textBoxBlackNumber"  Grid.Row="1" Text="{Binding Path=Value,ElementName=sliderBlackNumber}"  FontSize="30" VerticalAlignment="Center" TextAlignment="Center" Width="70"/>
+                    <TextBlock x:Name="textBlockBlackColor"  Grid.Row="0" Text="Czarny"  FontSize="30" FontFamily="Tahoma" Margin="10" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                    <TextBox x:Name="textBoxBlackNumber"  Grid.Row="1" Text="{Binding Path=Value,ElementName=sliderBlackNumber}"  FontSize="30" FontFamily="Tahoma" VerticalAlignment="Center" TextAlignment="Center" Width="70"/>
                 <Slider x:Name="sliderBlackNumber" Grid.Row="2" Minimum="0" Maximum="100" Value="5" VerticalAlignment="Center" Margin="10,10,10,10" TickFrequency="1" IsSnapToTickEnabled="True"/>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="1">
@@ -87,12 +101,24 @@
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
-                <TextBlock x:Name="textBlockWhiteColor"  Grid.Row="0" Text="Biały"  FontSize="30" Margin="10" HorizontalAlignment="Center"  VerticalAlignment="Center" />
-                <TextBox x:Name="textBoxWhiteNumber"  Grid.Row="1" Text="{Binding Path=Value,ElementName=sliderWhiteNumber}"  FontSize="30" VerticalAlignment="Center" TextAlignment="Center" Width="70"/>
+                    <TextBlock x:Name="textBlockWhiteColor"  Grid.Row="0" Text="Biały"  FontSize="30" Margin="10" FontFamily="Tahoma" HorizontalAlignment="Center"  VerticalAlignment="Center" />
+                    <TextBox x:Name="textBoxWhiteNumber"  Grid.Row="1" Text="{Binding Path=Value,ElementName=sliderWhiteNumber}"  FontSize="30" FontFamily="Tahoma" VerticalAlignment="Center" TextAlignment="Center" Width="70"/>
                 <Slider x:Name="sliderWhiteNumber" Grid.Row="2" Minimum="0" Maximum="100" Value="50" VerticalAlignment="Center" Margin="10,10,10,10" TickFrequency="1" IsSnapToTickEnabled="True"/>
             </Grid>
-            <Button x:Name="buttonCalibrate" Grid.Column="2" Content="Zapisz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonCalibrate_Click"/>
-            <TextBlock x:Name="textBlockCalibrationStatus" Grid.Column="3" Text="Nie skalibrowano!" FontWeight="Bold" FontSize="30" Margin="40" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#b50900"/>
+                <Button x:Name="buttonCalibrate" Grid.Column="2" Content="Zapisz" Width="100" Height="40" FontSize="20" FontFamily="Tahoma" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonCalibrate_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="14"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush  StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#bdc3c7" Offset="1"/>
+                            <GradientStop Color="#2c3e50" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="textBlockCalibrationStatus" Grid.Column="3" Text="Nie skalibrowano!" FontWeight="Bold" FontSize="30"  FontFamily="Tahoma" Margin="40" VerticalAlignment="Center" HorizontalAlignment="Left" Foreground="#b50900"/>
         </Grid>
         </Border>
         <Border Grid.Row="2" BorderThickness="4 0 4 4" BorderBrush="Black">
@@ -102,9 +128,33 @@
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="2*"/>
             </Grid.ColumnDefinitions>
-            <Button x:Name="buttonStart" Grid.Column="0" Content="Start" Width="150" Height="70" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonStart_Click"/>
-            <Button x:Name="buttonStop" Grid.Column="1" Content="Stop" Width="150" Height="70" FontSize="30" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonStop_Click"/>
-            <TextBlock x:Name="textBlockProgramStatus" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
+                <Button x:Name="buttonStart" Grid.Column="0" Content="Start" Width="150" Height="70" FontSize="30" FontFamily="Tahoma" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonStart_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="25"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush  StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#bdc3c7" Offset="1"/>
+                            <GradientStop Color="#2c3e50" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <Button x:Name="buttonStop" Grid.Column="1" Content="Stop" Width="150" Height="70" FontSize="30" FontFamily="Tahoma" HorizontalAlignment="Center" VerticalAlignment="Center" Click="buttonStop_Click">
+                    <Button.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="CornerRadius" Value="25"/>
+                        </Style>
+                    </Button.Resources>
+                    <Button.Background>
+                        <LinearGradientBrush  StartPoint="0,1" EndPoint="1,0">
+                            <GradientStop Color="#bdc3c7" Offset="1"/>
+                            <GradientStop Color="#2c3e50" Offset="0"/>
+                        </LinearGradientBrush>
+                    </Button.Background>
+                </Button>
+                <TextBlock x:Name="textBlockProgramStatus" Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" />
         </Grid>
         </Border>
     </Grid>
