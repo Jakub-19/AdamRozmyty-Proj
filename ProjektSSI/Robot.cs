@@ -46,14 +46,17 @@ namespace ProjektSSI
 
             while (isDriving)
             {
-                Debug.WriteLine("");
-                Debug.WriteLine("");
+
                 Debug.WriteLine("Right motor speed: " + RightMotor);
                 Debug.WriteLine("Left motor speed: " + LeftMotor);
+                Debug.WriteLine("");
+                Debug.WriteLine("");
+
+                await Task.Delay(20);
                 //await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, RightMotor);
-               // await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, LeftMotor);
-                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.A, RightMotor, 10, false);
-                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.D, LeftMotor, 10, false);
+                //await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, LeftMotor);
+                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.A, RightMotor, 20, false);
+                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.D, LeftMotor, 20, false);
                 //_brick.BatchCommand.TurnMotorAtPower(OutputPort.A, RightMotor);
                 //_brick.BatchCommand.TurnMotorAtPower(OutputPort.D, LeftMotor);
                 await _brick.BatchCommand.SendCommandAsync();
@@ -108,29 +111,37 @@ namespace ProjektSSI
                 inclination = Math.Abs(inclination);
                 LeftMotor = (int)inclination / -2;
                 RightMotor = (int)inclination;
+                //LeftMotor = -20;
+                //RightMotor = 40;
             }
             else//W prawo
             {
                 RightMotor = (int)inclination / -2;
                 LeftMotor = (int)inclination;
+                //LeftMotor = 40;
+                //RightMotor = -20;
             }
         }
         private void TurnEasy(double inclination)
         {
             Debug.WriteLine("TurnEasy " + inclination);
             _brick.DirectCommand.PlayToneAsync(100, 1000, 50);
-            if (inclination > 50 || inclination < -50)
-                inclination = 50;
+            if (inclination > 25 || inclination < -25)
+                inclination = 25;
             if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
-                RightMotor = (int)inclination * 2;
-                LeftMotor = (int)inclination;
+                RightMotor = (int)inclination * 4;
+                LeftMotor = (int)inclination * 2;
+                //RightMotor = 50;
+                //LeftMotor = 10;
             }
             else//W prawo
             {
-                LeftMotor = (int)inclination * 2;
-                RightMotor = (int)inclination;
+                LeftMotor = (int)inclination * 4;
+                RightMotor = (int)inclination * 2;
+                //LeftMotor = 50;
+                //RightMotor = 10;
             }
         }
         private void GoStraight(double inclination)

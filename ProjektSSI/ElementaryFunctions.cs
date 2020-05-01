@@ -28,9 +28,9 @@ namespace ProjektSSI
             if (readL < border && readR < border)
             {
                 if (previousTurn)
-                    return 10;
-                else
                     return -10;
+                else
+                    return 10;
             }
             if (readL > readR)
                 previousTurn = false;
