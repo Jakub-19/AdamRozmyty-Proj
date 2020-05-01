@@ -28,6 +28,7 @@ namespace ProjektSSI
                 a = 1.5; 
                 b = 2.5;
             }
+
             return 1 / (1 + Math.Pow(Math.Abs((x - c) / a), 2 * b));
         }
         #region funkcje przynależności prędkości
