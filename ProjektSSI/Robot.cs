@@ -70,7 +70,7 @@ namespace ProjektSSI
             RightMotor = 40;
         }
 
-        private void ChooseTurn(double inclination)
+        private void ChooseTurn(double inclination)//Robot wybiera kierunek ruchu
         {
             List<Action<double>> decisions = new List<Action<double>>();
             List<double> memberships = new List<double>();
