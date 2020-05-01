@@ -23,7 +23,7 @@ namespace ProjektSSI
             get => _leftMotor;
             set
             {
-                _rightMotor = value;
+                _leftMotor = value;
             }
         }
         private int RightMotor {
@@ -46,6 +46,8 @@ namespace ProjektSSI
 
             while (isDriving)
             {
+                Debug.WriteLine("");
+                Debug.WriteLine("");
                 Debug.WriteLine("Right motor speed: " + RightMotor);
                 Debug.WriteLine("Left motor speed: " + LeftMotor);
                 await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, RightMotor);
@@ -123,14 +125,14 @@ namespace ProjektSSI
         private void GoStraight(double inclination)
         {
             Debug.WriteLine("GoStraight " + inclination);
-            LeftMotor = 90;
-            RightMotor = 90;
+            LeftMotor = 20;
+            RightMotor = 20;
         }
 
         public void Connect()
         {
             _brick.ConnectAsync();
-            _brick.DirectCommand.SetMotorPolarity(OutputPort.A, Polarity.Backward);
+            _brick.DirectCommand.SetMotorPolarity(OutputPort.D, Polarity.Backward);
             _brick.DirectCommand.StopMotorAsync(OutputPort.All, false);
         }
 
@@ -143,8 +145,8 @@ namespace ProjektSSI
             Connected = true;
             leftSensor = (uint)e.Ports[InputPort.Four].RawValue;
             rightSensor = (uint)e.Ports[InputPort.One].RawValue;
-            Debug.WriteLine("Left sensor value: " + leftSensor);
-            Debug.WriteLine("Right sensor value: " + rightSensor);
+            //Debug.WriteLine("Left sensor value: " + leftSensor);
+            //Debug.WriteLine("Right sensor value: " + rightSensor);
             //_brick.DirectCommand.PlayToneAsync(100, 1000, 300);
         }
     }

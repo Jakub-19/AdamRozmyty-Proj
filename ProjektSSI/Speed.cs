@@ -70,8 +70,8 @@ namespace ProjektSSI
 
             //wybranie wartości max dla reguł pogrupowanych względem S-M-F
             double resultantSpeedSlow = Max(tabSlow);
-            double resultantSpeedMedium = Max(tabSlow);
-            double resultantSpeedFast = Max(tabSlow);
+            double resultantSpeedMedium = Max(tabMedium);
+            double resultantSpeedFast = Max(tabFast);
             Debug.WriteLine("resultantSpeedSlow: " + resultantSpeedSlow);
             Debug.WriteLine("resultantSpeedMedium: " + resultantSpeedMedium);
             Debug.WriteLine("resultantSpeedFast: " + resultantSpeedFast);
