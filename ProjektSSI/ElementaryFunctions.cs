@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ProjektSSI
 {
@@ -13,6 +14,8 @@ namespace ProjektSSI
         public static double P { get; set; }
         static public double Reading(int readingLeft, int readingRight) //funkcja zwracająca obliczoną wartość odczytu, gdzie 100-maksymalnie czarny, 0-maksymalnie biały
         {
+            Debug.WriteLine("Reading.readingLeft: " + readingLeft);
+            Debug.WriteLine("Reading.readingRight: " + readingRight);
             double readL = Math.Abs(((readingLeft - BlackColor) * P) - 100);
             double readR = Math.Abs(((readingRight - BlackColor) * P) - 100);
             return (readR - readL) / 10;

@@ -55,8 +55,8 @@ namespace ProjektSSI
 
         private void buttonCalibrate_Click(object sender, RoutedEventArgs e)
         {
-            ElementaryFunctions.BlackColor = (uint)sliderBlackNumber.Value;
-            ElementaryFunctions.WhiteColor = (uint)sliderWhiteNumber.Value;
+            ElementaryFunctions.BlackColor = uint.Parse(textBoxBlackNumber.Text);
+            ElementaryFunctions.WhiteColor = uint.Parse(textBoxWhiteNumber.Text);
             ElementaryFunctions.P = 100 / (ElementaryFunctions.WhiteColor - ElementaryFunctions.BlackColor);
             buttonStart.IsEnabled = true;
             textBlockCalibrationStatus.Text = "Skalibrowano.";
