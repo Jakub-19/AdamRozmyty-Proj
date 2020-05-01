@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ProjektSSI
 {
@@ -23,11 +24,18 @@ namespace ProjektSSI
             double leftMotorSpeedSlow = ElementaryFunctions.SpeedSlow(leftMotorSpeed);
             double leftMotorSpeedMedium = ElementaryFunctions.SpeedMedium(leftMotorSpeed);
             double leftMotorSpeedFast = ElementaryFunctions.SpeedFast(leftMotorSpeed);
-
+            Debug.WriteLine("leftMotorSpeedRear: " + leftMotorSpeedRear);
+            Debug.WriteLine("leftMotorSpeedSlow:" + leftMotorSpeedSlow);
+            Debug.WriteLine("leftMotorSpeedMedium: " + leftMotorSpeedMedium);
+            Debug.WriteLine("leftMotorSpeedFast: " + leftMotorSpeedFast);
             double rightMotorSpeedRear = ElementaryFunctions.SpeedRear(rightMotorSpeed);
             double rightMotorSpeedSlow = ElementaryFunctions.SpeedSlow(rightMotorSpeed);
             double rightMotorSpeedMedium = ElementaryFunctions.SpeedMedium(rightMotorSpeed);
             double rightMotorSpeedFast = ElementaryFunctions.SpeedFast(rightMotorSpeed);
+            Debug.WriteLine("rightMotorSpeedRear: " + rightMotorSpeedRear);
+            Debug.WriteLine("rightMotorSpeedSlow: " + rightMotorSpeedSlow);
+            Debug.WriteLine("rightMotorSpeedMedium: " + rightMotorSpeedMedium);
+            Debug.WriteLine("rightMotorSpeedFast: " + rightMotorSpeedFast);
 
             double[] tabSlow = new double[7];
             double[] tabMedium = new double[5];
@@ -64,6 +72,9 @@ namespace ProjektSSI
             double resultantSpeedSlow = Max(tabSlow);
             double resultantSpeedMedium = Max(tabSlow);
             double resultantSpeedFast = Max(tabSlow);
+            Debug.WriteLine("resultantSpeedSlow: " + resultantSpeedSlow);
+            Debug.WriteLine("resultantSpeedMedium: " + resultantSpeedMedium);
+            Debug.WriteLine("resultantSpeedFast: " + resultantSpeedFast);
 
             //defuzzyfikacja metodą środka ciężkości
             double result = ((resultantSpeedSlow * slowParameter) + (resultantSpeedMedium * mediumParameter) + (resultantSpeedFast * fastParameter)) 

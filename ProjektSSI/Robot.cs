@@ -20,14 +20,14 @@ namespace ProjektSSI
         private int _leftMotor = 40;
         private int _rightMotor = 40;
         private int LeftMotor {
-            get => -_leftMotor;
+            get => _leftMotor;
             set
             {
                 _rightMotor = value;
             }
         }
         private int RightMotor {
-            get => -_rightMotor;
+            get => _rightMotor;
             set
             {
                 _rightMotor = value;
@@ -40,19 +40,22 @@ namespace ProjektSSI
             _brick.BrickChanged += ConnectionChanged;
         }
 
-        public async void Go()//Funkcja utrzymująca robota w ruchu
+        public async Task Go()//Funkcja utrzymująca robota w ruchu
         {
             isDriving = true;
 
-            while(isDriving)
+            while (isDriving)
             {
                 Debug.WriteLine("Right motor speed: " + RightMotor);
                 Debug.WriteLine("Left motor speed: " + LeftMotor);
                 await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, RightMotor);
                 await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, LeftMotor);
                 double robotSpeed = Speed.GetResultantSpeed(LeftMotor, RightMotor);
+                Debug.WriteLine("GetResultantSpeed return: " + robotSpeed);
                 double reading = ElementaryFunctions.Reading((int)leftSensor, (int)rightSensor);
+                Debug.WriteLine("ElementaryFunctions.Reading return: " + reading);
                 double inclination = Core.HowTheRouteRuns(robotSpeed, reading);
+                Debug.WriteLine("HowTheRouteRuns return: " + inclination);
                 ChooseTurn(inclination);
             }
 
@@ -63,6 +66,8 @@ namespace ProjektSSI
             isDriving = false;
             await _brick.DirectCommand.StopMotorAsync(OutputPort.A, false);
             await _brick.DirectCommand.StopMotorAsync(OutputPort.D, false);
+            LeftMotor = 40;
+            RightMotor = 40;
         }
 
         private void ChooseTurn(double inclination)
@@ -87,7 +92,8 @@ namespace ProjektSSI
 
         private void TurnHard(double inclination)
         {
-            if(inclination < 0)//W lewo
+            Debug.WriteLine("TurnHard " + inclination);
+            if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
                 LeftMotor = (int)inclination / 2;
@@ -101,6 +107,7 @@ namespace ProjektSSI
         }
         private void TurnEasy(double inclination)
         {
+            Debug.WriteLine("TurnEasy " + inclination);
             if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
@@ -115,6 +122,7 @@ namespace ProjektSSI
         }
         private void GoStraight(double inclination)
         {
+            Debug.WriteLine("GoStraight " + inclination);
             LeftMotor = 90;
             RightMotor = 90;
         }
@@ -122,6 +130,8 @@ namespace ProjektSSI
         public void Connect()
         {
             _brick.ConnectAsync();
+            _brick.DirectCommand.SetMotorPolarity(OutputPort.A, Polarity.Backward);
+            _brick.DirectCommand.StopMotorAsync(OutputPort.All, false);
         }
 
         private void ConnectionChanged(object sender, BrickChangedEventArgs e)
