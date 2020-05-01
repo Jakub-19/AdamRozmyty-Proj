@@ -50,8 +50,15 @@ namespace ProjektSSI
                 Debug.WriteLine("");
                 Debug.WriteLine("Right motor speed: " + RightMotor);
                 Debug.WriteLine("Left motor speed: " + LeftMotor);
-                await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, RightMotor);
-                await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, LeftMotor);
+                //await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, RightMotor);
+               // await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, LeftMotor);
+                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.A, RightMotor, 10, false);
+                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.D, LeftMotor, 10, false);
+                //_brick.BatchCommand.TurnMotorAtPower(OutputPort.A, RightMotor);
+                //_brick.BatchCommand.TurnMotorAtPower(OutputPort.D, LeftMotor);
+                await _brick.BatchCommand.SendCommandAsync();
+                //await _brick.DirectCommand.TurnMotorAtPowerForTimeAsync(OutputPort.A, RightMotor, 15, false);
+                //await _brick.DirectCommand.TurnMotorAtPowerForTimeAsync(OutputPort.D, LeftMotor, 15, false);
                 double robotSpeed = Speed.GetResultantSpeed(LeftMotor, RightMotor);
                 Debug.WriteLine("GetResultantSpeed return: " + robotSpeed);
                 double reading = ElementaryFunctions.Reading((int)leftSensor, (int)rightSensor);
@@ -95,21 +102,25 @@ namespace ProjektSSI
         private void TurnHard(double inclination)
         {
             Debug.WriteLine("TurnHard " + inclination);
+            _brick.DirectCommand.PlayToneAsync(100, 200, 50);
             if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
-                LeftMotor = (int)inclination / 2;
+                LeftMotor = (int)inclination / -2;
                 RightMotor = (int)inclination;
             }
             else//W prawo
             {
-                RightMotor = (int)inclination / 2;
+                RightMotor = (int)inclination / -2;
                 LeftMotor = (int)inclination;
             }
         }
         private void TurnEasy(double inclination)
         {
             Debug.WriteLine("TurnEasy " + inclination);
+            _brick.DirectCommand.PlayToneAsync(100, 1000, 50);
+            if (inclination > 50 || inclination < -50)
+                inclination = 50;
             if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
@@ -125,8 +136,8 @@ namespace ProjektSSI
         private void GoStraight(double inclination)
         {
             Debug.WriteLine("GoStraight " + inclination);
-            LeftMotor = 20;
-            RightMotor = 20;
+            LeftMotor = 90;
+            RightMotor = 90;
         }
 
         public void Connect()

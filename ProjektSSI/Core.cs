@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ProjektSSI
 {
@@ -10,11 +11,11 @@ namespace ProjektSSI
     {
         public static double HowTheRouteRuns(double speed, double reading)
         {
-            const int hardLeft = -90;
-            const int easyLeft = -30;
+            const int hardLeft = -100;
+            const int easyLeft = -50;
             const int straight = 0;
-            const int easyRight = 30;
-            const int hardRight = 90;
+            const int easyRight = 50;
+            const int hardRight = 100;
 
             #region HardLeft
             double hardLeftMembership;
@@ -27,15 +28,15 @@ namespace ProjektSSI
             temp = ElementaryFunctions.ReadingEasyLeft(reading) * ElementaryFunctions.SpeedFast(speed);
             if (temp > hardLeftMembership)
                 hardLeftMembership = temp;
+            temp = ElementaryFunctions.ReadingHardLeft(reading) * ElementaryFunctions.SpeedSlow(speed);
+            if (temp > hardLeftMembership)
+                hardLeftMembership = temp;
             #endregion
 
             #region EasyLeft
             double easyLeftMembership;
-            temp = ElementaryFunctions.ReadingHardLeft(reading) * ElementaryFunctions.SpeedSlow(speed);
-            easyLeftMembership = temp;
             temp = ElementaryFunctions.ReadingEasyLeft(reading) * ElementaryFunctions.SpeedMedium(speed);
-            if(temp > easyLeftMembership)
-                easyLeftMembership = temp;
+            easyLeftMembership = temp;
             temp = ElementaryFunctions.ReadingEasyLeft(reading) * ElementaryFunctions.SpeedSlow(speed);
             if(temp > easyLeftMembership)
                 easyLeftMembership = temp;
@@ -63,19 +64,25 @@ namespace ProjektSSI
             temp = ElementaryFunctions.ReadingEasyRight(reading) * ElementaryFunctions.SpeedFast(speed);
             if (temp > hardRightMembership)
                 hardRightMembership = temp;
+            temp = ElementaryFunctions.ReadingHardRight(reading) * ElementaryFunctions.SpeedSlow(speed);
+            if (temp > hardRightMembership)
+                hardRightMembership = temp;
             #endregion
 
             #region EasyRight
             double easyRightMembership;
-            temp = ElementaryFunctions.ReadingHardRight(reading) * ElementaryFunctions.SpeedSlow(speed);
-            easyRightMembership = temp;
             temp = ElementaryFunctions.ReadingEasyRight(reading) * ElementaryFunctions.SpeedMedium(speed);
-            if (temp > easyRightMembership)
-                easyRightMembership = temp;
+            easyRightMembership = temp;
             temp = ElementaryFunctions.ReadingEasyRight(reading) * ElementaryFunctions.SpeedSlow(speed);
             if (temp > easyRightMembership)
                 easyRightMembership = temp;
             #endregion
+
+            Debug.WriteLine("hardLeftMembership: " + hardLeftMembership);
+            Debug.WriteLine("easyLeftMembership: " + easyLeftMembership);
+            Debug.WriteLine("straightMembership: " + straightMembership);
+            Debug.WriteLine("easyRightMembership: " + easyRightMembership);
+            Debug.WriteLine("hardRightMembership: " + hardRightMembership);
 
             double value = (easyLeftMembership * easyLeft + easyRightMembership * easyRight + hardRightMembership * hardRight + hardLeftMembership * hardLeft + straightMembership * straight) / (easyLeftMembership + easyRightMembership + hardRightMembership + hardLeftMembership + straightMembership);
             return value;

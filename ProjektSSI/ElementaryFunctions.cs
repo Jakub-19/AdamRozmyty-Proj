@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace ProjektSSI
 {
@@ -14,11 +15,29 @@ namespace ProjektSSI
         public static uint WhiteColorRight { get; set; }
         public static double P_L { get; set; }
         public static double P_R { get; set; }
+        private static bool previousTurn = true;//true = prawo
         static public double Reading(int readingLeft, int readingRight) //funkcja zwracająca obliczoną wartość odczytu, gdzie 100-maksymalnie czarny, 0-maksymalnie biały
         {
+            Debug.WriteLine("readingLeft: " + readingLeft);
+            Debug.WriteLine("readingRight: " + readingRight);
             double readL = Math.Abs(((readingLeft - BlackColorLeft) * P_L) - 100);
             double readR = Math.Abs(((readingRight - BlackColorRight) * P_R) - 100);
-            return (readR - readL) / 10;
+            Debug.WriteLine("readL: " + readL);
+            Debug.WriteLine("readR: " + readR);
+            double border = (WhiteColorLeft + WhiteColorRight) / 2;
+            if (readL < border && readR < border)
+            {
+                if (previousTurn)
+                    return 10;
+                else
+                    return -10;
+            }
+            if (readL > readR)
+                previousTurn = false;
+            else
+                previousTurn = true;
+
+            return ((readR - readL) / 10);
         }
         static public double Bell(double x, double c, double x1, double x2, bool straight) //funkcja zwracająca obliczoną wartość funkcji przynależności (wartości w zakresie <0, 1>)
         {
@@ -28,7 +47,7 @@ namespace ProjektSSI
             double a = 2.5, b = 2.5;
             if (straight)
             {
-                a = 1.5; 
+                a = 0.5; 
                 b = 2.5;
             }
 
@@ -52,13 +71,13 @@ namespace ProjektSSI
             if (x >= 0)
                 return 0;
             else
-                return -1;
+                return 1;
         }
         #endregion
         #region funkcje przynależności odczytu
         static public double ReadingEasyRight(double x)
         {
-            return Bell(x, 5, 0, 10, false);
+            return Bell(x, 4, 0, 10, false);
         }
         static public double ReadingHardRight(double x)
         {
@@ -66,7 +85,7 @@ namespace ProjektSSI
         }
         static public double ReadingEasyLeft(double x)
         {
-            return Bell(x, -5, -10, 0, false);
+            return Bell(x, -4, -10, 0, false);
         }
         static public double ReadingHardLeft(double x)
         {
