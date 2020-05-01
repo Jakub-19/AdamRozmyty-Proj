@@ -28,7 +28,8 @@ namespace ProjektSSI
         public MainWindow()
         {
             InitializeComponent();
-            buttonCalibrate.IsEnabled = false;
+            buttonCalibrateLeft.IsEnabled = false;
+            buttonCalibrateRight.IsEnabled = false;
             buttonStart.IsEnabled = false;
             buttonStop.IsEnabled = false;
         }
@@ -37,7 +38,8 @@ namespace ProjektSSI
         {
             buttonStop.IsEnabled = true;
             buttonStart.IsEnabled = false;
-            buttonCalibrate.IsEnabled = false;
+            buttonCalibrateLeft.IsEnabled = false;
+            buttonCalibrateRight.IsEnabled = false;
             buttonConnect.IsEnabled = false;
             textBlockProgramStatus.Text = "Program działa...";
             robot.Go();
@@ -49,18 +51,29 @@ namespace ProjektSSI
             textBlockProgramStatus.Text = "Program został zatrzymany.";
             buttonStop.IsEnabled = false;
             buttonStart.IsEnabled = true;
-            buttonCalibrate.IsEnabled = true;
+            buttonCalibrateLeft.IsEnabled = true;
+            buttonCalibrateRight.IsEnabled = true;
             buttonConnect.IsEnabled = true;
         }
 
-        private void buttonCalibrate_Click(object sender, RoutedEventArgs e)
+        private void buttonCalibrateLeft_Click(object sender, RoutedEventArgs e)
         {
-            ElementaryFunctions.BlackColor = uint.Parse(textBoxBlackNumber.Text);
-            ElementaryFunctions.WhiteColor = uint.Parse(textBoxWhiteNumber.Text);
-            ElementaryFunctions.P = 100 / (ElementaryFunctions.WhiteColor - ElementaryFunctions.BlackColor);
+            ElementaryFunctions.BlackColorLeft = uint.Parse(textBoxBlackNumberLeft.Text);
+            ElementaryFunctions.WhiteColorLeft = uint.Parse(textBoxWhiteNumberLeft.Text);
+            ElementaryFunctions.P_L = 100 / (ElementaryFunctions.WhiteColorLeft - ElementaryFunctions.BlackColorLeft);
+            textBlockCalibrationStatusLeft.Text = "Skalibrowano.";
+            textBlockCalibrationStatusLeft.Foreground = Brushes.Green;
+            buttonCalibrateRight.IsEnabled = true;
+        }
+
+        private void buttonCalibrateRight_Click(object sender, RoutedEventArgs e)
+        {
+            ElementaryFunctions.BlackColorRight = uint.Parse(textBoxBlackNumberRight.Text);
+            ElementaryFunctions.WhiteColorRight = uint.Parse(textBoxWhiteNumberRight.Text);
+            ElementaryFunctions.P_R = 100 / (ElementaryFunctions.WhiteColorRight - ElementaryFunctions.BlackColorRight);
             buttonStart.IsEnabled = true;
-            textBlockCalibrationStatus.Text = "Skalibrowano.";
-            textBlockCalibrationStatus.Foreground = Brushes.Green;
+            textBlockCalibrationStatusRight.Text = "Skalibrowano.";
+            textBlockCalibrationStatusRight.Foreground = Brushes.Green;
         }
 
         private void buttonConnect_Click(object sender, RoutedEventArgs e)
@@ -72,9 +85,11 @@ namespace ProjektSSI
         }
         private void ShowConnectionInfo()
         {
-                buttonCalibrate.IsEnabled = true;
+                buttonCalibrateLeft.IsEnabled = true;
                 textBlockConnectionStatus.Text = "Połączono.";
                 textBlockConnectionStatus.Foreground = Brushes.Green;
         }
+
+        
     }
 }
