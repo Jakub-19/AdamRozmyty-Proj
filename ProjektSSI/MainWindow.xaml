@@ -57,11 +57,14 @@
                       HorizontalAlignment="Stretch" 
                       VerticalAlignment="Center"
             >
+                <ComboBoxItem>0</ComboBoxItem>
                 <ComboBoxItem>1</ComboBoxItem>
                 <ComboBoxItem>2</ComboBoxItem>
                 <ComboBoxItem>3</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">4</ComboBoxItem>
-            </ComboBox>
+                <ComboBoxItem>5</ComboBoxItem>
+                <ComboBoxItem>6</ComboBoxItem>
+                </ComboBox>
                 <Button x:Name="buttonConnect" Grid.Column="2" Content="Połącz" Width="100" Height="40" FontSize="20" HorizontalAlignment="Center" FontFamily="Tahoma" VerticalAlignment="Center" Click="buttonConnect_Click">
                     <Button.Resources>
                         <Style TargetType="Border">
