@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjektSSI"
         mc:Ignorable="d"
-        Title="Adam Rozmyty" Height="450" Width="800">
+        Title="Adam Rozmyty" ResizeMode="CanMinimize" Height="500" Width="800">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush  StartPoint="0,1" EndPoint="1,0">

@@ -52,11 +52,11 @@ namespace ProjektSSI
                 Debug.WriteLine("");
                 Debug.WriteLine("");
 
-                await Task.Delay(20);
+                await Task.Delay(65);
                 //await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.A, RightMotor);
                 //await _brick.DirectCommand.TurnMotorAtPowerAsync(OutputPort.D, LeftMotor);
-                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.A, RightMotor, 20, false);
-                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.D, LeftMotor, 20, false);
+                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.A, RightMotor, 40, false);
+                _brick.BatchCommand.TurnMotorAtPowerForTime(OutputPort.D, LeftMotor, 40, false);
                 //_brick.BatchCommand.TurnMotorAtPower(OutputPort.A, RightMotor);
                 //_brick.BatchCommand.TurnMotorAtPower(OutputPort.D, LeftMotor);
                 await _brick.BatchCommand.SendCommandAsync();
@@ -87,15 +87,15 @@ namespace ProjektSSI
             List<Action<double>> decisions = new List<Action<double>>();
             List<double> memberships = new List<double>();
 
-            memberships.Add(ElementaryFunctions.ReadingHardLeft(inclination));
+            memberships.Add(ElementaryFunctions.ReadingHardLeft(inclination/10));
             decisions.Add(TurnHard);
-            memberships.Add(ElementaryFunctions.ReadingEasyLeft(inclination));
+            memberships.Add(ElementaryFunctions.ReadingEasyLeft(inclination/10));
             decisions.Add(TurnEasy);
-            memberships.Add(ElementaryFunctions.ReadingStraight(inclination));
+            memberships.Add(ElementaryFunctions.ReadingStraight(inclination/10));
             decisions.Add(GoStraight);
-            memberships.Add(ElementaryFunctions.ReadingEasyRight(inclination));
+            memberships.Add(ElementaryFunctions.ReadingEasyRight(inclination/10));
             decisions.Add(TurnEasy);
-            memberships.Add(ElementaryFunctions.ReadingHardRight(inclination));
+            memberships.Add(ElementaryFunctions.ReadingHardRight(inclination/10));
             decisions.Add(TurnHard);
 
             int index = memberships.IndexOf(memberships.Max());
@@ -109,37 +109,37 @@ namespace ProjektSSI
             if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
-                LeftMotor = (int)inclination / -2;
+                LeftMotor = (int)inclination / 4;
                 RightMotor = (int)inclination;
-                //LeftMotor = -20;
-                //RightMotor = 40;
+                //LeftMotor = -90;
+                //RightMotor = 90;
             }
             else//W prawo
             {
-                RightMotor = (int)inclination / -2;
+                RightMotor = (int)inclination / 4;
                 LeftMotor = (int)inclination;
-                //LeftMotor = 40;
-                //RightMotor = -20;
+                //LeftMotor = 90;
+                //RightMotor = -90;
             }
         }
         private void TurnEasy(double inclination)
         {
             Debug.WriteLine("TurnEasy " + inclination);
             _brick.DirectCommand.PlayToneAsync(100, 1000, 50);
-            if (inclination > 25 || inclination < -25)
-                inclination = 25;
+            if (inclination > 50 || inclination < -50)
+                inclination = 50;
             if (inclination < 0)//W lewo
             {
                 inclination = Math.Abs(inclination);
-                RightMotor = (int)inclination * 4;
-                LeftMotor = (int)inclination * 2;
+                RightMotor = (int)inclination * 2;
+                LeftMotor = (int)(inclination * 1.5);
                 //RightMotor = 50;
                 //LeftMotor = 10;
             }
             else//W prawo
             {
-                LeftMotor = (int)inclination * 4;
-                RightMotor = (int)inclination * 2;
+                LeftMotor = (int)inclination * 2;
+                RightMotor = (int)(inclination * 1.5);
                 //LeftMotor = 50;
                 //RightMotor = 10;
             }
@@ -147,8 +147,8 @@ namespace ProjektSSI
         private void GoStraight(double inclination)
         {
             Debug.WriteLine("GoStraight " + inclination);
-            LeftMotor = 90;
-            RightMotor = 90;
+            LeftMotor = 100;
+            RightMotor = 100;
         }
 
         public void Connect()

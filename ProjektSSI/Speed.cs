@@ -19,6 +19,8 @@ namespace ProjektSSI
         }
         public static double GetResultantSpeed(int leftMotorSpeed, int rightMotorSpeed) //funkcja zwracająca prędkość wypadkową pojazdu
         {
+            leftMotorSpeed /= 10;
+            rightMotorSpeed /= 10;
             #region definicje zmiennych
             double leftMotorSpeedRear = ElementaryFunctions.SpeedRear(leftMotorSpeed);
             double leftMotorSpeedSlow = ElementaryFunctions.SpeedSlow(leftMotorSpeed);

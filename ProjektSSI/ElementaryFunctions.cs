@@ -24,8 +24,8 @@ namespace ProjektSSI
             double readR = Math.Abs(((readingRight - BlackColorRight) * P_R) - 100);
             Debug.WriteLine("readL: " + readL);
             Debug.WriteLine("readR: " + readR);
-            double border = (WhiteColorLeft + WhiteColorRight) / 2;
-            if (readL < border && readR < border)
+            //double border = 40;
+            if (readingLeft > WhiteColorLeft/2 && readingRight > WhiteColorRight/2)
             {
                 if (previousTurn)
                     return -10;
@@ -41,13 +41,12 @@ namespace ProjektSSI
         }
         static public double Bell(double x, double c, double x1, double x2, bool straight) //funkcja zwracająca obliczoną wartość funkcji przynależności (wartości w zakresie <0, 1>)
         {
-            x /= 10;//
             if (x < x1 || x > x2)
                 return 0;
             double a = 2.5, b = 2.5;
             if (straight)
             {
-                a = 0.5; 
+                a = 1.5; 
                 b = 2.5;
             }
 

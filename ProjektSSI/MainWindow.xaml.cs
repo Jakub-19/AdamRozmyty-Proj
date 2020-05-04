@@ -61,7 +61,7 @@ namespace ProjektSSI
             ElementaryFunctions.BlackColorLeft = uint.Parse(textBoxBlackNumberLeft.Text);
             ElementaryFunctions.WhiteColorLeft = uint.Parse(textBoxWhiteNumberLeft.Text);
             ElementaryFunctions.P_L = 100 / (ElementaryFunctions.WhiteColorLeft - ElementaryFunctions.BlackColorLeft);
-            textBlockCalibrationStatusLeft.Text = "Skalibrowano.";
+            textBlockCalibrationStatusLeft.Text = "Skalibrowano: " + textBoxBlackNumberLeft.Text + "/" + textBoxWhiteNumberLeft.Text;
             textBlockCalibrationStatusLeft.Foreground = Brushes.Green;
             buttonCalibrateRight.IsEnabled = true;
         }
@@ -72,7 +72,7 @@ namespace ProjektSSI
             ElementaryFunctions.WhiteColorRight = uint.Parse(textBoxWhiteNumberRight.Text);
             ElementaryFunctions.P_R = 100 / (ElementaryFunctions.WhiteColorRight - ElementaryFunctions.BlackColorRight);
             buttonStart.IsEnabled = true;
-            textBlockCalibrationStatusRight.Text = "Skalibrowano.";
+            textBlockCalibrationStatusRight.Text = "Skalibrowano: " + textBoxBlackNumberRight.Text + "/" + textBoxWhiteNumberRight.Text;
             textBlockCalibrationStatusRight.Foreground = Brushes.Green;
         }
 

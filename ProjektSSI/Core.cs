@@ -17,6 +17,7 @@ namespace ProjektSSI
             const int easyRight = 50;
             const int hardRight = 100;
 
+            speed /= 10;
             #region HardLeft
             double hardLeftMembership;
             double temp;
