@@ -24,7 +24,7 @@ namespace ProjektSSI
             double readR = Math.Abs(((readingRight - BlackColorRight) * P_R) - 100);
             Debug.WriteLine("readL: " + readL);
             Debug.WriteLine("readR: " + readR);
-            //double border = 40;
+
             if (readingLeft > WhiteColorLeft/2 && readingRight > WhiteColorRight/2)
             {
                 if (previousTurn)

@@ -79,12 +79,6 @@ namespace ProjektSSI
                 easyRightMembership = temp;
             #endregion
 
-            Debug.WriteLine("hardLeftMembership: " + hardLeftMembership);
-            Debug.WriteLine("easyLeftMembership: " + easyLeftMembership);
-            Debug.WriteLine("straightMembership: " + straightMembership);
-            Debug.WriteLine("easyRightMembership: " + easyRightMembership);
-            Debug.WriteLine("hardRightMembership: " + hardRightMembership);
-
             double value = (easyLeftMembership * easyLeft + easyRightMembership * easyRight + hardRightMembership * hardRight + hardLeftMembership * hardLeft + straightMembership * straight) / (easyLeftMembership + easyRightMembership + hardRightMembership + hardLeftMembership + straightMembership);
             return value;
         }
